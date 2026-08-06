@@ -1,0 +1,19 @@
+# DuckDB database files (regenerated from sql/load_data.sql)
+*.duckdb
+*.duckdb.wal
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# dbt (once you add it)
+target/
+dbt_packages/
+logs/
+
+# OS/editor noise
+.DS_Store
+.vscode/
