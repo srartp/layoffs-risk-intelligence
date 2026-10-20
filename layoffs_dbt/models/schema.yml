@@ -1,0 +1,67 @@
+version: 2
+
+models:
+  - name: int_layoff_events
+    description: One row per layoff event, with the target and grouped categories.
+    columns:
+      - name: event_id
+        data_tests:
+          - unique
+          - not_null
+      - name: company
+        data_tests:
+          - not_null
+      - name: event_date
+        data_tests:
+          - not_null
+      - name: is_significant_layoff
+        description: 1 if percentage_laid_off >= 0.20 or total_laid_off >= 100; 0 if the available signal(s) are below; null if neither is reported.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+      - name: is_shutdown
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+
+  - name: int_layoff_features
+    description: One row per layoff event, with features built only from earlier events.
+    columns:
+      - name: event_id
+        data_tests:
+          - unique
+          - not_null
+      - name: company
+        data_tests:
+          - not_null
+      - name: event_date
+        data_tests:
+          - not_null
+
+  - name: mart_model_training
+    description: Labelled events for model training; split on event_date.
+    columns:
+      - name: event_id
+        data_tests:
+          - unique
+          - not_null
+      - name: company
+        data_tests:
+          - not_null
+      - name: event_date
+        data_tests:
+          - not_null
+      - name: is_significant_layoff
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+
+  - name: mart_industry_trends
+    description: Events and average percentage laid off per grouped industry per quarter.
