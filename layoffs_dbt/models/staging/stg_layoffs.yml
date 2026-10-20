@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: stg_layoffs
+    description: Cleaned layoff events, one row per distinct event from raw_layoffs.
+    columns:
+      - name: event_id
+        description: Hash of company, location, event_date, total_laid_off and percentage_laid_off.
+        data_tests:
+          - unique
+          - not_null
+      - name: company
+        data_tests:
+          - not_null
+      - name: event_date
+        data_tests:
+          - not_null
+      - name: industry
+        data_tests:
+          - not_null
+      - name: stage
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - Seed
+                  - Series A
+                  - Series B
+                  - Series C
+                  - Series D
+                  - Series E
+                  - Series F
+                  - Series G
+                  - Series H
+                  - Series I
+                  - Series J
+                  - Post-IPO
+                  - Acquired
+                  - Private Equity
+                  - Subsidiary
+                  - Unknown
+      - name: percentage_laid_off
+        description: Share of workforce laid off, as a fraction between 0 and 1.

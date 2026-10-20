@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: layoffs
+    description: Raw layoffs data loaded from data/layoffs.csv via sql/load_data.sql.
+    schema: main
+    tables:
+      - name: raw_layoffs
+        description: One row per layoff event, as loaded from the source CSV.
